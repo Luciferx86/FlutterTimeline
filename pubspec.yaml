@@ -1,8 +1,8 @@
 name: timeline_horizontal
-description: A new Flutter package project.
+description: A Timeline widget which can be used to show different stages in a bigger process.
 version: 0.0.1
-author:
-homepage:
+author: Akshay Arora<akshayarora.10.6.97@gmail.com>
+homepage: https://github.com/Luciferx86/FlutterTimeline
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  scrollable_positioned_list: ^0.1.7
 
 dev_dependencies:
   flutter_test:
