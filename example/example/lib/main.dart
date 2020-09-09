@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: MyHomePage(title: 'Flutter Demo Home Page'),
@@ -44,16 +44,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    var newIcon = Icon(
-      Icons.accessibility_new,
-      color: Colors.yellow,
-    );
     screenProgress = new ProgressTimeline(
       states: allStages,
-      textStyle: TextStyle(fontSize: 20, color: Colors.blue),
-      connectorLength: 100,
-      connectorColor: Colors.orange,
-      iconSize: 30,
+      iconSize: 35,
     );
     super.initState();
   }
