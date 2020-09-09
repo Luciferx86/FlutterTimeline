@@ -16,7 +16,7 @@ Add the following to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-    progress_timeline: ^0.0.2
+    progress_timeline: ^0.0.4
 ```
 
 ### How to Use
