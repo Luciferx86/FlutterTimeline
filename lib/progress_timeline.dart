@@ -4,18 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+/// Created by Luciferx86 on 08/09/20.
 class ProgressTimeline extends StatefulWidget {
+  /// a List of all states to be rendered
   final List<SingleState> states;
-  double height;
-  Icon checkedIcon;
-  Icon currentIcon;
-  Icon failedIcon;
-  Icon uncheckedIcon;
-  Color connectorColor;
-  double connectorLength;
-  double connectorWidth;
-  double iconSize;
-  TextStyle textStyle;
+
+  /// height of the widget
+  final double height;
+
+  /// Icon used to render a checked stage
+  final Icon checkedIcon;
+
+  /// Icon used to render current stage
+  final Icon currentIcon;
+
+  /// Icon used to render a failed stage
+  final Icon failedIcon;
+
+  /// Icon used to render an unchecked stage
+  final Icon uncheckedIcon;
+
+  /// Color of the connectors
+  final Color connectorColor;
+
+  /// Length of the connectors
+  final double connectorLength;
+
+  /// Width of the connectors
+  final double connectorWidth;
+
+  ///Size of Icons rendered in each stage
+  final double iconSize;
+
+  /// Style of text used to display stage title
+  final TextStyle textStyle;
 
   ProgressTimeline(
       {@required this.states,
@@ -30,16 +52,19 @@ class ProgressTimeline extends StatefulWidget {
       this.connectorColor,
       this.uncheckedIcon});
 
-  _ProgressTimelineState state = new _ProgressTimelineState();
+  final _ProgressTimelineState state = new _ProgressTimelineState();
 
+  /// method to jump to next stage in the process.
   void gotoNextStage() {
     state.gotoNextStage();
   }
 
+  /// method to mark the current stage as failed.
   void failCurrentStage() {
     state.failCurrentStage();
   }
 
+  /// method to go back to previous stage in the process.
   void gotoPreviousStage() {
     state.gotoPreviousStage();
   }
@@ -146,23 +171,22 @@ class _ProgressTimelineState extends State<ProgressTimeline> {
 }
 
 class _RenderedState extends StatelessWidget {
-  Icon checkedIcon;
-  Icon currentIcon;
-  Icon failedIcon;
-  Icon uncheckedIcon;
-  bool isChecked;
-  String stateTitle;
-  TextStyle textStyle;
-  bool isLeading;
-  bool isTrailing;
-  int stateNumber;
-  bool isFailed;
-  bool isCurrent;
-  double iconSize;
-  Color connectorColor;
-
-  double connectorLength;
-  double connectorWidth;
+  final Icon checkedIcon;
+  final Icon currentIcon;
+  final Icon failedIcon;
+  final Icon uncheckedIcon;
+  final bool isChecked;
+  final String stateTitle;
+  final TextStyle textStyle;
+  final bool isLeading;
+  final bool isTrailing;
+  final int stateNumber;
+  final bool isFailed;
+  final bool isCurrent;
+  final double iconSize;
+  final Color connectorColor;
+  final double connectorLength;
+  final double connectorWidth;
 
   _RenderedState(
       {@required this.isChecked,
@@ -298,7 +322,10 @@ class _RenderedState extends StatelessWidget {
 }
 
 class SingleState {
+  /// Do not use this explicitly(in most cases)
   bool isFailed;
+
+  /// Title of a state
   String stateTitle;
 
   SingleState({@required this.stateTitle, this.isFailed});
