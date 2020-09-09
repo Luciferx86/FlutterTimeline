@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-class ScreenProgress extends StatefulWidget {
+class ProgressTimeline extends StatefulWidget {
   final List<SingleState> states;
   double height;
   Icon checkedIcon;
@@ -17,7 +17,7 @@ class ScreenProgress extends StatefulWidget {
   double iconSize;
   TextStyle textStyle;
 
-  ScreenProgress(
+  ProgressTimeline(
       {@required this.states,
       this.height,
       this.checkedIcon,
@@ -30,7 +30,7 @@ class ScreenProgress extends StatefulWidget {
       this.connectorColor,
       this.uncheckedIcon});
 
-  _ScreenProgressState state = new _ScreenProgressState();
+  _ProgressTimelineState state = new _ProgressTimelineState();
 
   void gotoNextStage() {
     state.gotoNextStage();
@@ -45,10 +45,10 @@ class ScreenProgress extends StatefulWidget {
   }
 
   @override
-  _ScreenProgressState createState() => state;
+  _ProgressTimelineState createState() => state;
 }
 
-class _ScreenProgressState extends State<ScreenProgress> {
+class _ProgressTimelineState extends State<ProgressTimeline> {
   int currentStageIndex = 0;
   List<SingleState> states;
   double height = 100;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:progress_timeline/progress_timeline.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -30,8 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  ScreenProgress screenProgress;
-
+  ProgressTimeline screenProgress;
 
   List<SingleState> allStages = [
     SingleState(stateTitle: "Stage 1"),
@@ -50,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Icons.accessibility_new,
       color: Colors.yellow,
     );
-    screenProgress = new ScreenProgress(
+    screenProgress = new ProgressTimeline(
       states: allStages,
       textStyle: TextStyle(fontSize: 20, color: Colors.blue),
       connectorLength: 100,
