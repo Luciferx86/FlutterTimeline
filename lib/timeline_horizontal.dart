@@ -15,6 +15,7 @@ class ScreenProgress extends StatefulWidget {
   double connectorLength;
   double connectorWidth;
   double iconSize;
+  TextStyle textStyle;
 
   ScreenProgress(
       {@required this.states,
@@ -23,6 +24,7 @@ class ScreenProgress extends StatefulWidget {
       this.currentIcon,
       this.failedIcon,
       this.iconSize,
+      this.textStyle,
       this.connectorLength,
       this.connectorWidth,
       this.connectorColor,
@@ -76,6 +78,10 @@ class _ScreenProgressState extends State<ScreenProgress> {
 
   void gotoPreviousStage() {
     setState(() {
+      if (currentStageIndex >= 0) {
+        states[currentStageIndex].isFailed = false;
+      }
+
       if (currentStageIndex > 0) {
         currentStageIndex--;
         _controller.scrollTo(
@@ -115,56 +121,24 @@ class _ScreenProgressState extends State<ScreenProgress> {
     print(len);
     for (var i = 0; i < states.length; i++) {
       print(i);
-      if (i == 0) {
-        allStates.add(RenderedState(
-          connectorLength: widget.connectorLength,
-          connectorWidth: widget.connectorWidth,
-          connectorColor: widget.connectorColor,
-          iconSize: widget.iconSize,
-          checkedIcon: widget.checkedIcon,
-          failedIcon: widget.failedIcon,
-          currentIcon: widget.currentIcon,
-          uncheckedIcon: widget.uncheckedIcon,
-          stateNumber: i + 1,
-          isCurrent: i == currentStageIndex,
-          isFailed: states[i].isFailed,
-          isChecked: i < currentStageIndex,
-          stateTitle: states[i].stateTitle,
-          isLeading: true,
-        ));
-      } else if (i == states.length - 1) {
-        allStates.add(RenderedState(
-          connectorLength: widget.connectorLength,
-          connectorWidth: widget.connectorWidth,
-          connectorColor: widget.connectorColor,
-          iconSize: widget.iconSize,
-          checkedIcon: widget.checkedIcon,
-          failedIcon: widget.failedIcon,
-          currentIcon: widget.currentIcon,
-          uncheckedIcon: widget.uncheckedIcon,
-          stateNumber: i + 1,
-          isCurrent: i == currentStageIndex,
-          isFailed: states[i].isFailed,
-          isChecked: i < currentStageIndex,
-          stateTitle: states[i].stateTitle,
-          isTrailing: true,
-        ));
-      } else {
-        allStates.add(RenderedState(
-            connectorLength: widget.connectorLength,
-            connectorWidth: widget.connectorWidth,
-            connectorColor: widget.connectorColor,
-            iconSize: widget.iconSize,
-            checkedIcon: widget.checkedIcon,
-            failedIcon: widget.failedIcon,
-            currentIcon: widget.currentIcon,
-            uncheckedIcon: widget.uncheckedIcon,
-            stateNumber: i + 1,
-            isCurrent: i == currentStageIndex,
-            isFailed: states[i].isFailed,
-            isChecked: i < currentStageIndex,
-            stateTitle: states[i].stateTitle));
-      }
+      allStates.add(RenderedState(
+        textStyle: widget.textStyle,
+        connectorLength: widget.connectorLength,
+        connectorWidth: widget.connectorWidth,
+        connectorColor: widget.connectorColor,
+        iconSize: widget.iconSize,
+        checkedIcon: widget.checkedIcon,
+        failedIcon: widget.failedIcon,
+        currentIcon: widget.currentIcon,
+        uncheckedIcon: widget.uncheckedIcon,
+        stateNumber: i + 1,
+        isCurrent: i == currentStageIndex,
+        isFailed: states[i].isFailed,
+        isChecked: i < currentStageIndex,
+        stateTitle: states[i].stateTitle,
+        isLeading: i == 0,
+        isTrailing: i == states.length - 1,
+      ));
     }
 
     return allStates;
@@ -178,6 +152,7 @@ class RenderedState extends StatelessWidget {
   Icon uncheckedIcon;
   bool isChecked;
   String stateTitle;
+  TextStyle textStyle;
   bool isLeading;
   bool isTrailing;
   int stateNumber;
@@ -197,6 +172,7 @@ class RenderedState extends StatelessWidget {
       Color connectorColor,
       double connectorLength,
       double connectorWidth,
+      TextStyle textStyle,
       this.failedIcon,
       this.currentIcon,
       this.checkedIcon,
@@ -209,7 +185,8 @@ class RenderedState extends StatelessWidget {
         this.connectorColor = connectorColor ?? Colors.green,
         this.connectorLength =
             connectorLength != null ? connectorLength / 2 : 40,
-        this.connectorWidth = connectorWidth ?? 5;
+        this.connectorWidth = connectorWidth ?? 5,
+        this.textStyle = textStyle ?? TextStyle();
 
   Widget line() {
     return Container(
@@ -287,9 +264,9 @@ class RenderedState extends StatelessWidget {
       children: [
         Container(
           margin: isLeading
-              ? const EdgeInsets.only(left: 15.0)
+              ? const EdgeInsets.only(left: 30.0)
               : isTrailing
-                  ? const EdgeInsets.only(right: 15.0)
+                  ? const EdgeInsets.only(right: 30.0)
                   : const EdgeInsets.all(0.0),
           child: Row(
             children: [
@@ -300,21 +277,19 @@ class RenderedState extends StatelessWidget {
           ),
         ),
         Container(
-            margin: isLeading
-                ? const EdgeInsets.only(right: 15.0)
-                : isTrailing
-                    ? const EdgeInsets.only(left: 15.0)
-                    : const EdgeInsets.all(0.0),
-            child: Text(stateTitle)),
+            child: Text(
+          stateTitle,
+          style: textStyle,
+        )),
       ],
     );
   }
 
   Widget renderCurrentState() {
-    if (isChecked) {
-      return getCheckedIcon();
-    } else if (isFailed != null && isFailed) {
+    if (isFailed != null && isFailed) {
       return getFailedIcon();
+    } else if (isChecked != null && isChecked) {
+      return getCheckedIcon();
     } else if (isCurrent != null && isCurrent) {
       return getCurrentIcon();
     }

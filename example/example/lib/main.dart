@@ -51,27 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     screenProgress = new ScreenProgress(
       states: allStages,
-//      checkedIcon: Icon(
-//        Icons.keyboard,
-//        color: Colors.blue,
-//        size: 100,
-//      ),
-//      failedIcon: Icon(
-//        Icons.keyboard,
-//        color: Colors.grey,
-//      ),
-//      currentIcon: Icon(
-//        Icons.keyboard,
-//        color: Colors.grey,
-//      ),
-//      uncheckedIcon: Icon(
-//        Icons.keyboard,
-//        color: Colors.grey,
-//      ),
-//      connectorColor: Colors.blue,
-//      connectorWidth: 10,
-//      connectorLength: 100,
-      iconSize: 40,
+      textStyle: TextStyle(fontSize: 20, color: Colors.blue),
+      connectorLength: 100,
+      connectorColor: Colors.orange,
+      iconSize: 30,
     );
     super.initState();
   }
