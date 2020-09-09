@@ -5,6 +5,8 @@
 This widget can be used to make provide an interactive timeline view of a bigger process.
 Fluid Animations while switching between stages.
 
+![](demo.gif)
+
 
 ### Installation
 
