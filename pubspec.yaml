@@ -1,4 +1,4 @@
-name: timeline_horizontal
+name: progress_timeline
 description: A Timeline widget which can be used to show different stages in a bigger process.
 version: 0.0.1
 author: Akshay Arora<akshayarora.10.6.97@gmail.com>

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:progress_timeline/progress_timeline.dart';
 
-import 'package:timeline_horizontal/timeline_horizontal.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,6 +31,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   ScreenProgress screenProgress;
+  
 
   List<SingleState> allStages = [
     SingleState(stateTitle: "Stage 1"),

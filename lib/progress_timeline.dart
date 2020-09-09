@@ -1,4 +1,4 @@
-library timeline_horizontal;
+library progress_timeline;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -121,7 +121,7 @@ class _ScreenProgressState extends State<ScreenProgress> {
     print(len);
     for (var i = 0; i < states.length; i++) {
       print(i);
-      allStates.add(RenderedState(
+      allStates.add(_RenderedState(
         textStyle: widget.textStyle,
         connectorLength: widget.connectorLength,
         connectorWidth: widget.connectorWidth,
@@ -145,7 +145,7 @@ class _ScreenProgressState extends State<ScreenProgress> {
   }
 }
 
-class RenderedState extends StatelessWidget {
+class _RenderedState extends StatelessWidget {
   Icon checkedIcon;
   Icon currentIcon;
   Icon failedIcon;
@@ -164,7 +164,7 @@ class RenderedState extends StatelessWidget {
   double connectorLength;
   double connectorWidth;
 
-  RenderedState(
+  _RenderedState(
       {@required this.isChecked,
       @required this.stateTitle,
       @required this.stateNumber,
