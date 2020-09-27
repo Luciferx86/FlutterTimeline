@@ -91,10 +91,10 @@ packages:
   progress_timeline:
     dependency: "direct main"
     description:
-      path: "../.."
+      path: ".."
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.0.4"
   scrollable_positioned_list:
     dependency: transitive
     description:

@@ -91,7 +91,7 @@ class _ProgressTimelineState extends State<ProgressTimeline> {
 
   void gotoNextStage() {
     setState(() {
-      if (currentStageIndex < states.length) {
+      if (currentStageIndex <= states.length - 1) {
         currentStageIndex++;
         _controller.scrollTo(
             index: currentStageIndex - 1,
@@ -104,11 +104,11 @@ class _ProgressTimelineState extends State<ProgressTimeline> {
   void gotoPreviousStage() {
     setState(() {
       if (currentStageIndex >= 0) {
+        if (currentStageIndex > 0) currentStageIndex--;
         states[currentStageIndex].isFailed = false;
       }
 
       if (currentStageIndex > 0) {
-        currentStageIndex--;
         _controller.scrollTo(
             index: currentStageIndex - 1 >= 0
                 ? currentStageIndex - 1

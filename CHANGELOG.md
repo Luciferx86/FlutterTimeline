@@ -13,3 +13,6 @@
 * Added Example
 * Added Documentation
 
+## [0.0.5] - 2020-09-27
+* Fixed a Bug where when going to last stage, coming back was not possible
+
