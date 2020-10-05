@@ -39,18 +39,23 @@ class ProgressTimeline extends StatefulWidget {
   /// Style of text used to display stage title
   final TextStyle textStyle;
 
-  ProgressTimeline(
-      {@required this.states,
-      this.height,
-      this.checkedIcon,
-      this.currentIcon,
-      this.failedIcon,
-      this.iconSize,
-      this.textStyle,
-      this.connectorLength,
-      this.connectorWidth,
-      this.connectorColor,
-      this.uncheckedIcon});
+  /// Curve for Transition can be added, defaults to
+  final Curve transitionCurve;
+
+  ProgressTimeline({
+    @required this.states,
+    this.height,
+    this.checkedIcon,
+    this.currentIcon,
+    this.failedIcon,
+    this.iconSize,
+    this.textStyle,
+    this.connectorLength,
+    this.connectorWidth,
+    this.connectorColor,
+    this.uncheckedIcon,
+    this.transitionCurve = Curves.fastOutSlowIn,
+  });
 
   final _ProgressTimelineState state = new _ProgressTimelineState();
 
@@ -94,9 +99,10 @@ class _ProgressTimelineState extends State<ProgressTimeline> {
       if (currentStageIndex <= states.length - 1) {
         currentStageIndex++;
         _controller.scrollTo(
-            index: currentStageIndex - 1,
-            duration: Duration(milliseconds: 1000),
-            curve: Curves.fastOutSlowIn);
+          index: currentStageIndex - 1,
+          duration: Duration(milliseconds: 1000),
+          curve: widget.transitionCurve,
+        );
       }
     });
   }
@@ -110,11 +116,12 @@ class _ProgressTimelineState extends State<ProgressTimeline> {
 
       if (currentStageIndex > 0) {
         _controller.scrollTo(
-            index: currentStageIndex - 1 >= 0
-                ? currentStageIndex - 1
-                : currentStageIndex,
-            duration: Duration(milliseconds: 1000),
-            curve: Curves.fastOutSlowIn);
+          index: currentStageIndex - 1 >= 0
+              ? currentStageIndex - 1
+              : currentStageIndex,
+          duration: Duration(milliseconds: 1000),
+          curve: widget.transitionCurve,
+        );
       }
     });
   }
@@ -142,10 +149,7 @@ class _ProgressTimelineState extends State<ProgressTimeline> {
 
   List<Widget> buildStates() {
     List<Widget> allStates = [];
-    int len = states.length;
-    print(len);
     for (var i = 0; i < states.length; i++) {
-      print(i);
       allStates.add(_RenderedState(
         textStyle: widget.textStyle,
         connectorLength: widget.connectorLength,
@@ -188,24 +192,24 @@ class _RenderedState extends StatelessWidget {
   final double connectorLength;
   final double connectorWidth;
 
-  _RenderedState(
-      {@required this.isChecked,
-      @required this.stateTitle,
-      @required this.stateNumber,
-      double iconSize,
-      Color connectorColor,
-      double connectorLength,
-      double connectorWidth,
-      TextStyle textStyle,
-      this.failedIcon,
-      this.currentIcon,
-      this.checkedIcon,
-      this.uncheckedIcon,
-      this.isFailed = false,
-      this.isCurrent,
-      this.isLeading = false,
-      this.isTrailing = false})
-      : this.iconSize = iconSize ?? 25,
+  _RenderedState({
+    @required this.isChecked,
+    @required this.stateTitle,
+    @required this.stateNumber,
+    double iconSize,
+    Color connectorColor,
+    double connectorLength,
+    double connectorWidth,
+    TextStyle textStyle,
+    this.failedIcon,
+    this.currentIcon,
+    this.checkedIcon,
+    this.uncheckedIcon,
+    this.isFailed = false,
+    this.isCurrent,
+    this.isLeading = false,
+    this.isTrailing = false,
+  })  : this.iconSize = iconSize ?? 25,
         this.connectorColor = connectorColor ?? Colors.green,
         this.connectorLength =
             connectorLength != null ? connectorLength / 2 : 40,
@@ -301,10 +305,11 @@ class _RenderedState extends StatelessWidget {
           ),
         ),
         Container(
-            child: Text(
-          stateTitle,
-          style: textStyle,
-        )),
+          child: Text(
+            stateTitle,
+            style: textStyle,
+          ),
+        ),
       ],
     );
   }
