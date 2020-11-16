@@ -203,5 +203,6 @@ While initializing the `ProgressTimeline` widget, customize the TextStyle of how
 |  connectorWidth |   double  |                                   5                                  |
 |     iconSize    |   double  |                                  25                                  |
 |    textStyle    | TextStyle |                              TextStyle()                             |
+|transitionCurve|Curve| Curves.fastOutSlowIn|                           
 
 
