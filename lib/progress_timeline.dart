@@ -10,40 +10,40 @@ class ProgressTimeline extends StatefulWidget {
   final List<SingleState> states;
 
   /// height of the widget
-  final double height;
+  final double? height;
 
   /// Icon used to render a checked stage
-  final Icon checkedIcon;
+  final Icon? checkedIcon;
 
   /// Icon used to render current stage
-  final Icon currentIcon;
+  final Icon? currentIcon;
 
   /// Icon used to render a failed stage
-  final Icon failedIcon;
+  final Icon? failedIcon;
 
   /// Icon used to render an unchecked stage
-  final Icon uncheckedIcon;
+  final Icon? uncheckedIcon;
 
   /// Color of the connectors
-  final Color connectorColor;
+  final Color? connectorColor;
 
   /// Length of the connectors
-  final double connectorLength;
+  final double? connectorLength;
 
   /// Width of the connectors
-  final double connectorWidth;
+  final double? connectorWidth;
 
   ///Size of Icons rendered in each stage
-  final double iconSize;
+  final double? iconSize;
 
   /// Style of text used to display stage title
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// Curve for Transition can be added, defaults to
   final Curve transitionCurve;
 
   ProgressTimeline({
-    @required this.states,
+    required this.states,
     this.height,
     this.checkedIcon,
     this.currentIcon,
@@ -80,8 +80,8 @@ class ProgressTimeline extends StatefulWidget {
 
 class _ProgressTimelineState extends State<ProgressTimeline> {
   int currentStageIndex = 0;
-  List<SingleState> states;
-  double height = 100;
+  late List<SingleState> states;
+  double? height = 100;
 
   final _controller = ItemScrollController();
 
@@ -175,32 +175,32 @@ class _ProgressTimelineState extends State<ProgressTimeline> {
 }
 
 class _RenderedState extends StatelessWidget {
-  final Icon checkedIcon;
-  final Icon currentIcon;
-  final Icon failedIcon;
-  final Icon uncheckedIcon;
+  final Icon? checkedIcon;
+  final Icon? currentIcon;
+  final Icon? failedIcon;
+  final Icon? uncheckedIcon;
   final bool isChecked;
   final String stateTitle;
   final TextStyle textStyle;
   final bool isLeading;
   final bool isTrailing;
   final int stateNumber;
-  final bool isFailed;
-  final bool isCurrent;
+  final bool? isFailed;
+  final bool? isCurrent;
   final double iconSize;
   final Color connectorColor;
   final double connectorLength;
   final double connectorWidth;
 
   _RenderedState({
-    @required this.isChecked,
-    @required this.stateTitle,
-    @required this.stateNumber,
-    double iconSize,
-    Color connectorColor,
-    double connectorLength,
-    double connectorWidth,
-    TextStyle textStyle,
+    required this.isChecked,
+    required this.stateTitle,
+    required this.stateNumber,
+    double? iconSize,
+    Color? connectorColor,
+    double? connectorLength,
+    double? connectorWidth,
+    TextStyle? textStyle,
     this.failedIcon,
     this.currentIcon,
     this.checkedIcon,
@@ -233,8 +233,8 @@ class _RenderedState extends StatelessWidget {
   Widget getCheckedIcon() {
     return this.checkedIcon != null
         ? Icon(
-            this.checkedIcon.icon,
-            color: this.checkedIcon.color,
+            this.checkedIcon!.icon,
+            color: this.checkedIcon!.color,
             size: iconSize,
           )
         : Icon(
@@ -247,8 +247,8 @@ class _RenderedState extends StatelessWidget {
   Widget getFailedIcon() {
     return this.failedIcon != null
         ? Icon(
-            this.failedIcon.icon,
-            color: this.failedIcon.color,
+            this.failedIcon!.icon,
+            color: this.failedIcon!.color,
             size: iconSize,
           )
         : Icon(
@@ -261,8 +261,8 @@ class _RenderedState extends StatelessWidget {
   Widget getCurrentIcon() {
     return this.currentIcon != null
         ? Icon(
-            this.currentIcon.icon,
-            color: this.currentIcon.color,
+            this.currentIcon!.icon,
+            color: this.currentIcon!.color,
             size: iconSize,
           )
         : Icon(
@@ -275,8 +275,8 @@ class _RenderedState extends StatelessWidget {
   Widget getUnCheckedIcon() {
     return this.uncheckedIcon != null
         ? Icon(
-            this.uncheckedIcon.icon,
-            color: this.uncheckedIcon.color,
+            this.uncheckedIcon!.icon,
+            color: this.uncheckedIcon!.color,
             size: iconSize,
           )
         : Icon(
@@ -315,11 +315,11 @@ class _RenderedState extends StatelessWidget {
   }
 
   Widget renderCurrentState() {
-    if (isFailed != null && isFailed) {
+    if (isFailed != null && isFailed!) {
       return getFailedIcon();
     } else if (isChecked != null && isChecked) {
       return getCheckedIcon();
-    } else if (isCurrent != null && isCurrent) {
+    } else if (isCurrent != null && isCurrent!) {
       return getCurrentIcon();
     }
     return getUnCheckedIcon();
@@ -328,10 +328,10 @@ class _RenderedState extends StatelessWidget {
 
 class SingleState {
   /// Do not use this explicitly(in most cases)
-  bool isFailed;
+  bool? isFailed;
 
   /// Title of a state
   String stateTitle;
 
-  SingleState({@required this.stateTitle, this.isFailed});
+  SingleState({required this.stateTitle, this.isFailed});
 }
